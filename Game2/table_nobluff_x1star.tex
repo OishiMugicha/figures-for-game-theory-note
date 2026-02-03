@@ -1,0 +1,27 @@
+\documentclass[border=3pt]{standalone}
+\usepackage{amsmath}
+
+\begin{document}
+
+{\Large
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+    $\mathrm{Y}\text{'s hand}$ &
+    $p(\mathrm{Y}\text{'s hand})$ &
+    X calls &
+    Product &
+    X folds &
+    Product \\
+\hline
+    $[0, x_1^*]$ & $x_1^*$ & $-1$ & $-x_1^*$ & $0$ & $0$ \\
+\hline
+    $[x_1^*, y_1]$ & $y_1 - x_1^*$ & $\mathrm{P}+1$ &
+    $(\mathrm{P}+1)(y_1 - x_1^*)$ & $0$ & $0$ \\
+\hline
+    Total & & & $(\mathrm{P}+1)y_1 - (\mathrm{P}+2)x_1^*$ & & $0$ \\
+\hline
+\end{tabular}
+}
+
+\end{document}

@@ -1,0 +1,31 @@
+\documentclass[tikz,border=3pt]{standalone}
+\usetikzlibrary{positioning,arrows.meta,shapes.geometric,backgrounds}
+
+\begin{document}
+\begin{tikzpicture}
+
+% nodes (manual positions for clearer layout)
+\node[align=center, font=\large] (root) {$(X,Y)\in[0,1]^2$ \\randomly chosen};
+\node[below=22mm of root] (xcheck) {};
+\node[align=center, below left=22mm and 15mm of xcheck, font=\large] (ycheck) {
+$\mathrm{P}$ if $X < Y$, \\
+$0$ if $X > Y$.
+};
+\node[below right=22mm and 18mm of xcheck] (ybets) {};
+\node[align=center, below right = 22mm and 8mm of ybets, font=\large] (xcall) {
+$\mathrm{P}+1$ if $X < Y$, \\
+$-1$ if $X > Y$.
+};
+\node[align=center, below left = 22mm and 18mm of ybets, font=\large] (xfold) {
+0
+};
+
+% edges with labels
+\draw[->] (root) -- (xcheck) node[midway,right, font=\large] {X checks};
+\draw[->] (xcheck) -- (ycheck) node[midway,left, font=\large] {Y checks};
+\draw[->] (xcheck) -- (ybets) node[midway,right, font=\large] {Y bets};
+\draw[->] (ybets) -- (xcall) node[midway,right, font=\large] {X calls};
+\draw[->] (ybets) -- (xfold) node[midway,left, font=\large] {X folds};
+
+\end{tikzpicture}
+\end{document}
