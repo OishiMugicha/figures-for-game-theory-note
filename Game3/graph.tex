@@ -1,0 +1,54 @@
+\documentclass[tikz,border=3pt]{standalone}
+\begin{document}
+
+\begin{tikzpicture}
+
+% 軸
+\draw[->] (0,0) -- (0,7);
+\draw[->] (0,0) -- (7,0);
+
+% 枠（x=1, y=1）
+\draw (0,6) -- (6,6) -- (6,0);
+
+% 軸ラベル（←ここをLargeに）
+\node[font=\Large] at (7,-0.5) {X};
+\node[font=\Large] at (-0.5,7) {Y};
+
+% --- x軸の目盛り ---
+\node[font=\Large] at (0,-0.5) {$0$};
+\node[font=\Large] at (36/7,-0.5) {$\frac{6}{7}$};
+\node[font=\Large] at (6,-0.5) {$1$};
+
+% --- y軸の目盛り ---
+\node[font=\Large] at (-0.5,0) {$0$};
+\node[font=\Large] at (-0.5,18/7) {$\frac{3}{7}$};
+\node[font=\Large] at (-0.5,36/7) {$\frac{6}{7}$};
+\node[font=\Large] at (-0.5,6.2) {$1$};
+
+% 対角線 y = x
+\draw (0,0) -- (36/7,36/7);
+\draw[dashed] (36/7,36/7) -- (6,6);
+
+% --- 水平線 ---
+% y = 3/7
+\draw (0,18/7) -- (36/7,18/7);
+\draw[dashed] (36/7,18/7) -- (6,18/7);
+
+% y = 6/7
+\draw (0,36/7) -- (36/7,36/7);
+\draw[dashed] (36/7,36/7) -- (6,36/7);
+
+% --- 縦線 x = 6/7（y <= 6/7 のみ点線）---
+\draw[dashed] (36/7,0) -- (36/7,36/7);
+
+% 曲線1: y = (7/12)x^2 （x <= 6/7）
+\draw[domain=0:6/7, smooth, variable=\x]
+  plot ({6*\x}, {6*(7/12)*\x*\x});
+
+% 曲線2: y = 1 - 7/6 (1/2 x^2 - 7/18 x^3) （x <= 6/7）
+\draw[domain=0:6/7, smooth, variable=\x]
+  plot ({6*\x}, {6*(1 - (7/6)*(1/2*\x*\x - 7/18*\x*\x*\x))});
+
+\end{tikzpicture}
+
+\end{document}
