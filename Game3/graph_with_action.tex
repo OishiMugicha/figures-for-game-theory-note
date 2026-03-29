@@ -1,0 +1,144 @@
+\documentclass[tikz,border=3pt]{standalone}
+\usetikzlibrary{shadings}
+\begin{document}
+
+\begin{tikzpicture}
+
+% 軸
+\draw[->] (0,0) -- (0,7);
+\draw[->] (0,0) -- (7,0);
+
+% 枠
+\draw (0,6) -- (6,6) -- (6,0);
+
+% 軸ラベル
+\node[font=\Large] at (7,-0.5) {X};
+\node[font=\Large] at (-0.5,7) {Y};
+
+% 目盛り
+\node[font=\Large] at (0,-0.5) {$0$};
+\node[font=\Large] at (36/7,-0.5) {$x_0$};
+\node[font=\Large] at (6,-0.5) {$1$};
+
+\node[font=\Large] at (-0.5,0) {$0$};
+\node[font=\Large] at (-0.5,18/7) {$y_0$};
+\node[font=\Large] at (-0.5,36/7) {$y_0'$};
+\node[font=\Large] at (-0.5,6.2) {$1$};
+
+% =========================
+% 左三角（赤グラデ）
+% =========================
+\shade[
+  bottom color=red!60,
+  top color=red!12
+]
+  (0,0)
+  -- (0,18/7)
+  -- (18/7,18/7)
+  -- cycle;
+
+% =========================
+% 青グラデーション
+% =========================
+\shade[
+  bottom color=blue!50,
+  top color=black!10
+]
+  plot[domain=0:6/7, variable=\x]
+    ({6*\x}, {6*(7/12)*\x*\x})
+  -- (36/7,18/7)
+  -- (18/7,18/7)
+  -- (0,0)
+  -- cycle;
+
+% =========================
+% 中央ピンク
+% =========================
+\fill[red!12]
+  (0,18/7)
+  -- (0,36/7)
+  -- (36/7,36/7)
+  -- (18/7,18/7)
+  -- cycle;
+
+% =========================
+% 左上（曲線2の下側）
+% =========================
+\shade[
+  bottom color=red!10,
+  top color=red!60
+]
+  plot[domain=0:6/7, variable=\x]
+    ({6*\x}, {6*(1 - (7/6)*(1/2*\x*\x - 7/18*\x*\x*\x))})
+  -- (36/7,36/7)
+  -- (0,36/7)
+  -- cycle;
+
+% =========================
+% 右側黒領域
+% =========================
+
+% 下
+\fill[black!10]
+  plot[domain=0:6/7, variable=\x]
+    ({6*\x}, {6*(7/12)*\x*\x})
+  -- (6,18/7)
+  -- (6,0)
+  -- (0,0)
+  -- cycle;
+
+% 中
+\fill[black!10]
+  (18/7,18/7)
+  -- (36/7,36/7)
+  -- (6,36/7)
+  -- (6,18/7)
+  -- cycle;
+
+% 上
+\fill[black!10]
+  plot[domain=6/7:0, variable=\x]
+    ({6*\x}, {6*(1 - (7/6)*(1/2*\x*\x - 7/18*\x*\x*\x))})
+  -- (6,6)
+  -- (6,36/7)
+  -- cycle;
+
+% =========================
+% 線
+% =========================
+
+% 対角線
+\draw (0,0) -- (36/7,36/7);
+\draw[dashed] (36/7,36/7) -- (6,6);
+
+% 水平線
+\draw (0,18/7) -- (6,18/7);
+
+\draw (0,36/7) -- (6,36/7);
+
+% 縦線
+\draw[dashed] (36/7,0) -- (36/7,36/7);
+
+% 曲線1
+\draw[domain=0:6/7, smooth, variable=\x]
+  plot ({6*\x}, {6*(7/12)*\x*\x});
+
+% 曲線2
+\draw[domain=0:6/7, smooth, variable=\x]
+  plot ({6*\x}, {6*(1 - (7/6)*(1/2*\x*\x - 7/18*\x*\x*\x))});
+
+% =========================
+% アクション
+% =========================
+
+\node[font=\large] at (6/7,36/7 + 6/14) {bc};
+\node[font=\large] at (36/7,36/7 + 6/14) {bf};
+\node[font=\large] at (10/7,27/7) {xx};
+\node[font=\large] at (34/7,26/7) {xx};
+\node[font=\large] at (6/7,13/7) {bc};
+\node[font=\large] at (20/7,11/7) {bc};
+\node[font=\large] at (34/7,8/7) {bf};
+
+\end{tikzpicture}
+
+\end{document}
